@@ -31,37 +31,46 @@ def selector(r):
 def generator(l):
     for i in range(l):
         selector(i)
-    print(*password,sep="")
-    t.insert(END,"hi")
-
+    Display()
+    
 def IsNumber():
     text = textin.get()
     try:
         length = int(text)
-        generator(length-5)
+        generator(length-4)
     except:
         print("Enter a No.")
 
 
 def compulsory():
-    for i in range(4,-1,-1):
+    for i in range(4,0,-1):
         selector(int(i))
 
 compulsory()        # includes compulsororily each type of character
 
+def Display():
+    str1 = ''.join(str(e) for e in password)
+    t.insert(END,str1)
+
 win = Tk()
+
 win.geometry('300x300')
 win.title("Password Generator")
 
 textin = StringVar()
 e1 = Entry(win , width = 20 , textvariable = textin)
-e1.place(x=80 , y=80)
+e1.place(x=85 , y=80)
 
-b = Button(win , text=" Go " , command=IsNumber)
-b.place(x=120 , y=110)
+goButton = Button(win , text=" Go " ,height=1 ,command=IsNumber)
+goButton.place(x=210 , y=77)
 
-t = Text(bg='light gray',height=1,width = 15)
-t.place(x=80 , y=150)
+t = Text(bg='light gray',height=1,width = 25)
+t.place(x=40 , y=150)
+
+# pyperclip has to be installed
+copyButton = Button(win , text=" Copy " ,height=1 ,command=IsNumber)
+copyButton.place(x=245 , y=147)
+
 
 win.mainloop()
 
