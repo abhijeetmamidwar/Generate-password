@@ -1,5 +1,7 @@
-from tkinter import *
 import random as rd
+import pyperclip as cp
+from tkinter import *
+
 
 letterC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"              ## 26 possibilites
 letterS = "abcdefghijklmnopqrstuvwxyz"              ## 26 possibilites
@@ -7,6 +9,7 @@ numbers = "1234567890"                              ## 10 possibilites
 alpha = "\`~!@#$%^&*(_)-+=[{]}|;:'.>,<?/*" + '"'    ## 33 possibilites
 
 password = []
+final = ""
 
 team = {"letterC":26,"letterS":26,"numbers":10,"alpha":33}
 
@@ -33,24 +36,28 @@ def generator(l):
         selector(i)
     Display()
     
-def IsNumber():
-    text = textin.get()
-    try:
-        length = int(text)
-        generator(length-4)
-    except:
-        print("Enter a No.")
-
-
 def compulsory():
     for i in range(4,0,-1):
         selector(int(i))
 
-compulsory()        # includes compulsororily each type of character
+def IsNumber():
+    text = textin.get()
+    try:
+        length = int(text)
+        password.clear()
+        compulsory()        # includes compulsororily each type of character
+        generator(length-4)
+    except:
+        print("Enter a No.")
 
 def Display():
-    str1 = ''.join(str(e) for e in password)
-    t.insert(END,str1)
+    global final
+    final = ''.join(password)      # str(e) for e in password
+    t.delete("1.0", "end")
+    t.insert(END,final)
+
+def copyToClipboard():
+    cp.copy(final)
 
 win = Tk()
 
@@ -67,8 +74,7 @@ goButton.place(x=210 , y=77)
 t = Text(bg='light gray',height=1,width = 25)
 t.place(x=40 , y=150)
 
-# pyperclip has to be installed
-copyButton = Button(win , text=" Copy " ,height=1 ,command=IsNumber)
+copyButton = Button(win , text=" Copy " ,height=1 ,command=copyToClipboard)
 copyButton.place(x=245 , y=147)
 
 
