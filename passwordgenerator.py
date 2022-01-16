@@ -51,7 +51,7 @@ def IsNumber():
         compulsory()  # includes compulsororily each type of character
         generator(length - 4)
     except:
-        print("Enter a No.")
+        l1.config(text="Enter a Number !!")
 
 
 def Display():
@@ -62,25 +62,35 @@ def Display():
 
 
 def copyToClipboard():
+    win.config(bg="Orange")
+    l1.config(bg="Orange")
+    l2.config(text="Copied to Clipboard",bg="Orange")
     cp.copy(final)
 
 
 win = Tk()
 
-win.geometry('300x300')
+win.geometry('500x500')
 win.title("Password Generator")
 
+img = PhotoImage(file='locks.png')
+Label(win, image=img).place(x=170, y=5)
+
+l1 = Label(win, text="Length of password ")
+l1.place(x=180, y=220)
 textin = StringVar()
 e1 = Entry(win, width=20, textvariable=textin)
-e1.place(x=85, y=80)
+e1.place(x=180, y=240)
 
 goButton = Button(win, text=" Go ", height=1, command=IsNumber)
-goButton.place(x=210, y=77)
+goButton.place(x=305, y=237)
 
 t = Text(bg='light gray', height=1, width=25)
-t.place(x=40, y=150)
+t.place(x=150, y=350)
 
+l2 = Label(win, text="Click Copy to copy password")
+l2.place(x=150, y=320)
 copyButton = Button(win, text=" Copy ", height=1, command=copyToClipboard)
-copyButton.place(x=245, y=147)
+copyButton.place(x=333, y=348)
 
 win.mainloop()
